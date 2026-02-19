@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Work - Jo Esterly</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Libre Baskerville', Georgia, serif;
+            font-size: 17px;
+            line-height: 1.75;
+            color: #1a1a1a;
+            background-color: #fefefe;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            opacity: 0.02;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+            z-index: 9999;
+        }
+
+        .container {
+            max-width: 780px;
+            margin: 0 auto;
+            padding: 0 clamp(28px, 8vw, 100px);
+        }
+
+        header {
+            padding: 14vh 0 8vh;
+            opacity: 0;
+            animation: fadeIn 1.4s ease-out 0.3s forwards;
+        }
+
+        @keyframes fadeIn {
+            to { opacity: 1; }
+        }
+
+        .artist-name {
+            font-size: clamp(11px, 1.1vw, 12px);
+            letter-spacing: 0.25em;
+            text-transform: uppercase;
+            color: #777;
+            margin-bottom: 6vh;
+            font-weight: 400;
+            text-decoration: none;
+            display: inline-block;
+            transition: color 0.3s ease;
+        }
+
+        .artist-name:hover {
+            color: #1a1a1a;
+        }
+
+        .lead-statement {
+            font-size: clamp(18px, 2.2vw, 22px);
+            font-style: italic;
+            line-height: 1.6;
+            color: #1a1a1a;
+            max-width: 620px;
+        }
+
+        .pieces-section {
+            padding: 6vh 0 10vh;
+            opacity: 0;
+            animation: fadeIn 1.4s ease-out 0.6s forwards;
+        }
+
+        .section-title {
+            font-size: clamp(11px, 1.2vw, 13px);
+            letter-spacing: 0.25em;
+            text-transform: uppercase;
+            color: #888;
+            margin-bottom: 4rem;
+            font-weight: 400;
+        }
+
+        .piece {
+            margin-bottom: 4rem;
+        }
+
+        .piece:last-child {
+            margin-bottom: 0;
+        }
+
+        .piece-title {
+            font-size: 17px;
+            font-weight: 400;
+            color: #1a1a1a;
+            margin-bottom: 0.5rem;
+        }
+
+        .piece-description {
+            font-size: 16px;
+            font-style: italic;
+            color: #555;
+            margin-bottom: 0.5rem;
+        }
+
+        .piece-link {
+            font-size: 14px;
+            color: #888;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .piece-link:hover {
+            color: #1a1a1a;
+        }
+
+        footer {
+            padding: 10vh 0 6vh;
+            border-top: 1px solid #e5e5e5;
+            margin-top: 8vh;
+            opacity: 0;
+            animation: fadeIn 1.4s ease-out 0.9s forwards;
+        }
+
+        .footer-content {
+            margin-bottom: 2rem;
+        }
+
+        .contact-link {
+            font-size: 15px;
+            color: #555;
+            text-decoration: none;
+            transition: color 0.4s ease;
+            letter-spacing: 0.01em;
+        }
+
+        .contact-link:hover {
+            color: #1a1a1a;
+        }
+
+        .copyright {
+            font-size: 12px;
+            color: #aaa;
+            letter-spacing: 0.03em;
+        }
+
+        @media (max-width: 768px) {
+            header {
+                padding: 10vh 0 6vh;
+            }
+
+            .piece {
+                margin-bottom: 3rem;
+            }
+        }
+
+        ::selection {
+            background: #d8cfc0;
+            color: #1a1a1a;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="container">
+            <a href="index.html" class="artist-name">Jo Esterly</a>
+            <p class="lead-statement">I am writing our Shadow Resume of the intangible intelligence that emerges when conventions have been exhausted.</p>
+        </div>
+    </header>
+
+    <section class="pieces-section">
+        <div class="container">
+            <h1 class="section-title">Work</h1>
+
+            <article class="piece">
+                <h2 class="piece-title">Signal in the Noise</h2>
+                <p class="piece-description">When human deviation is missing data.</p>
+                <a href="https://www.linkedin.com/in/jo-esterly-153a6b3b1" class="piece-link" target="_blank" rel="noopener">LinkedIn</a>
+            </article>
+
+            <article class="piece">
+                <h2 class="piece-title">The Widen Protocol</h2>
+                <p class="piece-description">Allowing AI to see human intelligence before correcting it.</p>
+                <a href="https://github.com/Jo-PHI/Jo-PHI" class="piece-link" target="_blank" rel="noopener">GitHub</a>
+            </article>
+
+            <article class="piece">
+                <h2 class="piece-title">The Baker's Thumb</h2>
+                <p class="piece-description">What if AI could see the expertise it is trained to overlook?</p>
+                <a href="https://jo-phi.hashnode.dev" class="piece-link" target="_blank" rel="noopener">HashNode</a>
+            </article>
+
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <a href="mailto:PHI@joesterly.com" class="contact-link">PHI@joesterly.com</a>
+            </div>
+            <p class="copyright">2026, Jo Esterly</p>
+        </div>
+    </footer>
+
+</body>
+</html>
