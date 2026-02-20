@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Monuments - Jo Esterly</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Libre Baskerville', Georgia, serif;
+            font-size: 17px;
+            line-height: 1.85;
+            color: #1a1a1a;
+            background-color: #fefefe;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        .container {
+            max-width: 680px;
+            margin: 0 auto;
+            padding: 0 clamp(28px, 8vw, 80px);
+        }
+
+        header {
+            padding: 12vh 0 6vh;
+            opacity: 0;
+            animation: fadeIn 1.4s ease-out 0.3s forwards;
+        }
+
+        @keyframes fadeIn {
+            to { opacity: 1; }
+        }
+
+        .back-link {
+            font-size: clamp(11px, 1.1vw, 12px);
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: #999;
+            text-decoration: none;
+            transition: color 0.3s ease;
+            display: inline-block;
+            margin-bottom: 6vh;
+        }
+
+        .back-link:hover {
+            color: #1a1a1a;
+        }
+
+        .piece-title {
+            font-size: clamp(24px, 3vw, 32px);
+            font-weight: 400;
+            font-style: italic;
+            color: #1a1a1a;
+            margin-bottom: 6vh;
+        }
+
+        .piece-content {
+            opacity: 0;
+            animation: fadeIn 1.4s ease-out 0.6s forwards;
+        }
+
+        .piece-content p {
+            margin-bottom: 1.8rem;
+            color: #2a2a2a;
+        }
+
+        .piece-content p:last-of-type {
+            margin-bottom: 0;
+        }
+
+        .piece-ending {
+            margin-top: 4vh;
+            padding-top: 4vh;
+            border-top: 1px solid #e5e5e5;
+            font-style: italic;
+            color: #555;
+        }
+
+        .tilde {
+            display: block;
+            text-align: center;
+            font-size: 24px;
+            color: #ccc;
+            margin: 5vh 0;
+        }
+
+        footer {
+            padding: 10vh 0 6vh;
+            border-top: 1px solid #e5e5e5;
+            margin-top: 10vh;
+            opacity: 0;
+            animation: fadeIn 1.4s ease-out 0.9s forwards;
+        }
+
+        .author-note {
+            font-size: 14px;
+            color: #777;
+            line-height: 1.7;
+            margin-bottom: 3vh;
+            font-style: italic;
+        }
+
+        .copyright {
+            font-size: 12px;
+            color: #aaa;
+            margin-bottom: 1.5rem;
+        }
+
+        .disclaimer {
+            font-size: 11px;
+            color: #bbb;
+            font-style: italic;
+        }
+
+        ::selection {
+            background: #d8cfc0;
+            color: #1a1a1a;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="container">
+            <a href="work.html" class="back-link">Back to Work</a>
+            <h1 class="piece-title">Monuments</h1>
+        </div>
+    </header>
+
+    <article class="piece-content">
+        <div class="container">
+            <p>The truck rumbled down the block before the sun. He swung off the back step, his thick gloves already damp. He wrestled the ash cans from the curb, sending the gray powder of burnt coal into the air. "Sanitation" stenciled on the cab doors. He wiped the ash from his face as he jumped in.</p>
+
+            <p>The block was littered with metal trash cans. Some had lids, mostly dented. All had slop, most had potato peels and many more had coffee grounds. He muttered at the old wet New York Daily that had let them spill out. He salvaged the blond on the cover of the pinup magazine.</p>
+
+            <p>And then there was the woman on his Tuesday route - though, really, it was hers. Tall and wrapped in a long black coat, with a flash of red, a headscarf framing her broad, angular face creating a portrait of the past. He never saw her eyes, only her commanding hands.</p>
+
+            <p>In the half-light, she leaned over the bins, her large hands sifting through the castoffs as if she were selecting relics, not scraps. She passed over a broken radio, brushed her fingers across a tenement banister, freed a loose spindle, tucked it under her arm, and moved on. He looked down at the glossy cover girl, then tossed her back into the bin.</p>
+
+            <p>A chair without a leg. One spindle last week. A picture frame's remnants.</p>
+
+            <p>Today, a tarnished doorknob slowed her down, and he passed. Her hands turned it over, tested its weight, examined the brass as if it were precious metal. She accepted the relic and slipped it into her sack.</p>
+
+            <p>He was nearing the end of the block. Between the last trash cans was an old headboard, dark from age, cracked in half but intact. It was for a single bed but still heavy. He knew underneath the grime was solid mahogany. He retrieved it, dragged it toward the curb, leaning it against the lamp post.</p>
+
+            <p>He swung back onto the truck, pulled the lever and did not look back when he saw a flash of red in the mirror. He knew she would build monuments.</p>
+
+            <span class="tilde">~</span>
+        </div>
+    </article>
+
+    <footer>
+        <div class="container">
+            <p class="copyright">Jo Esterly, 2025</p>
+            <p class="disclaimer">This piece is a work of fiction, drawn from observation. It is an impression of our humanness.</p>
+        </div>
+    </footer>
+
+</body>
+</html>

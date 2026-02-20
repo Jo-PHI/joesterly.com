@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Work - Jo Esterly</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Libre Baskerville', Georgia, serif;
+            font-size: 17px;
+            line-height: 1.75;
+            color: #1a1a1a;
+            background-color: #fefefe;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        .container {
+            max-width: 780px;
+            margin: 0 auto;
+            padding: 0 clamp(28px, 8vw, 100px);
+        }
+
+        header {
+            padding: 12vh 0 6vh;
+            opacity: 0;
+            animation: fadeIn 1.4s ease-out 0.3s forwards;
+        }
+
+        @keyframes fadeIn {
+            to { opacity: 1; }
+        }
+
+        .artist-name {
+            font-size: clamp(11px, 1.1vw, 12px);
+            letter-spacing: 0.25em;
+            text-transform: uppercase;
+            color: #777;
+            margin-bottom: 4vh;
+            font-weight: 400;
+            text-decoration: none;
+            display: inline-block;
+            transition: color 0.3s ease;
+        }
+
+        .artist-name:hover {
+            color: #1a1a1a;
+        }
+
+        .lead-statement {
+            font-size: clamp(20px, 2.4vw, 24px);
+            font-style: italic;
+            line-height: 1.5;
+            color: #1a1a1a;
+            max-width: 700px;
+            padding-bottom: 4vh;
+            border-bottom: 1px solid #e5e5e5;
+        }
+
+        /* Mosaics Section */
+        .mosaics-section {
+            padding: 8vh 0;
+            opacity: 0;
+            animation: fadeIn 1.4s ease-out 0.5s forwards;
+        }
+
+        .section-title {
+            font-size: clamp(12px, 1.3vw, 14px);
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: #888;
+            margin-bottom: 1rem;
+            font-weight: 400;
+        }
+
+        .section-subtitle {
+            font-size: 15px;
+            color: #666;
+            font-style: italic;
+            margin-bottom: 6vh;
+        }
+
+        .mosaic-piece {
+            margin-bottom: 5vh;
+        }
+
+        .mosaic-piece:last-child {
+            margin-bottom: 0;
+        }
+
+        .mosaic-title {
+            font-size: clamp(12px, 1.3vw, 14px);
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            color: #777;
+            margin-bottom: 0.8rem;
+            font-weight: 400;
+        }
+
+        .mosaic-description {
+            font-size: 16px;
+            line-height: 1.7;
+            color: #2a2a2a;
+            max-width: 560px;
+            font-style: italic;
+            margin-bottom: 0.5rem;
+        }
+
+        .mosaic-status {
+            font-size: 13px;
+            color: #aaa;
+            font-style: italic;
+        }
+
+        .mosaic-link {
+            font-size: 13px;
+            color: #1a1a1a;
+            text-decoration: none;
+            border-bottom: 1px solid #1a1a1a;
+            padding-bottom: 1px;
+            transition: color 0.3s ease, border-color 0.3s ease;
+        }
+
+        .mosaic-link:hover {
+            color: #555;
+            border-color: #555;
+        }
+
+        /* Transition Section */
+        .transition-section {
+            padding: 6vh 0;
+            border-top: 1px solid #e5e5e5;
+            opacity: 0;
+            animation: fadeIn 1.4s ease-out 0.6s forwards;
+        }
+
+        .transition-text {
+            font-size: 16px;
+            line-height: 1.8;
+            color: #444;
+            max-width: 620px;
+        }
+
+        /* Articles Section */
+        .articles-section {
+            padding: 6vh 0 8vh;
+            border-top: 1px solid #e5e5e5;
+            opacity: 0;
+            animation: fadeIn 1.4s ease-out 0.7s forwards;
+        }
+
+        .article {
+            margin-bottom: 4vh;
+        }
+
+        .article:last-child {
+            margin-bottom: 0;
+        }
+
+        .article-title {
+            font-size: 17px;
+            font-weight: 400;
+            color: #1a1a1a;
+            margin-bottom: 0.4rem;
+        }
+
+        .article-description {
+            font-size: 15px;
+            font-style: italic;
+            color: #666;
+            margin-bottom: 0.4rem;
+        }
+
+        .article-link {
+            font-size: 13px;
+            color: #999;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .article-link:hover {
+            color: #1a1a1a;
+        }
+
+        /* Footer */
+        footer {
+            padding: 8vh 0 6vh;
+            border-top: 1px solid #e5e5e5;
+            opacity: 0;
+            animation: fadeIn 1.4s ease-out 0.9s forwards;
+        }
+
+        .footer-content {
+            margin-bottom: 1.5rem;
+        }
+
+        .footer-link {
+            font-size: 15px;
+            color: #555;
+            text-decoration: none;
+            transition: color 0.4s ease;
+        }
+
+        .footer-link:hover {
+            color: #1a1a1a;
+        }
+
+        .copyright {
+            font-size: 12px;
+            color: #aaa;
+        }
+
+        ::selection {
+            background: #d8cfc0;
+            color: #1a1a1a;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="container">
+            <a href="index.html" class="artist-name">Jo Esterly</a>
+            <p class="lead-statement">I am writing our Shadow Resume -- the intangible intelligence that emerges from beneath our learned skills.</p>
+        </div>
+    </header>
+
+    <section class="mosaics-section">
+        <div class="container">
+            <h2 class="section-title">Portraits</h2>
+            <p class="section-subtitle">Selections from a living body of work written over 30 years</p>
+
+            <article class="mosaic-piece">
+                <h3 class="mosaic-title">Meringue</h3>
+                <p class="mosaic-description">A pastry chef in mid-thought, tangling with the business and the beauty of making cakes.</p>
+                <span class="mosaic-status">This piece is not available online</span>
+            </article>
+
+            <article class="mosaic-piece">
+                <h3 class="mosaic-title">Monuments</h3>
+                <p class="mosaic-description">A garbage man's keen eye watches a woman select objects from trash cans on his route.</p>
+                <a href="monuments.html" class="mosaic-link">Read</a>
+            </article>
+
+            <article class="mosaic-piece">
+                <h3 class="mosaic-title">Intersection</h3>
+                <p class="mosaic-description">At a red light, a delivery driver realizes how much he learned from watching others.</p>
+                <span class="mosaic-status">This piece is not available online</span>
+            </article>
+
+            <article class="mosaic-piece">
+                <h3 class="mosaic-title">Water</h3>
+                <p class="mosaic-description">He sees her grasping to dignity in her pursed lips, deciding whether to take a sip.</p>
+                <span class="mosaic-status">This piece is not available online</span>
+            </article>
+
+            <article class="mosaic-piece">
+                <h3 class="mosaic-title">Canvas</h3>
+                <p class="mosaic-description">She is pulled -- by doubts, fears and distractions -- but the strongest pull was always toward the paint.</p>
+                <span class="mosaic-status">This piece is not available online</span>
+            </article>
+
+        </div>
+    </section>
+
+    <section class="transition-section">
+        <div class="container">
+            <p class="transition-text">I created this body of work to fill in our Shadow Resume. When I shared pieces with AI models -- narrating the human expertise invisible to them -- the model shifted. Instead of flagging an error, it asked whether there might be an intelligence it could not see.</p>
+        </div>
+    </section>
+
+    <section class="articles-section">
+        <div class="container">
+            <h2 class="section-title">Articles</h2>
+
+            <article class="article">
+                <h3 class="article-title">Signal in the Noise</h3>
+                <p class="article-description">When human deviation is missing data.</p>
+                <a href="https://www.linkedin.com/in/jo-esterly-153a6b3b1" class="article-link" target="_blank" rel="noopener">LinkedIn</a>
+            </article>
+
+            <article class="article">
+                <h3 class="article-title">The Widen Protocol</h3>
+                <p class="article-description">Allowing AI to see human intelligence before correcting it.</p>
+                <a href="https://github.com/Jo-PHI/Jo-PHI" class="article-link" target="_blank" rel="noopener">GitHub</a>
+            </article>
+
+            <article class="article">
+                <h3 class="article-title">The Baker's Thumb</h3>
+                <p class="article-description">What if AI could see the expertise it is trained to overlook?</p>
+                <a href="https://jo-phi.hashnode.dev" class="article-link" target="_blank" rel="noopener">HashNode</a>
+            </article>
+
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <a href="mailto:PHI&#64;joesterly.com" class="footer-link">PHI&#64;joesterly.com</a>
+            </div>
+            <p class="copyright">2026, Jo Esterly</p>
+        </div>
+    </footer>
+
+</body>
+</html>
