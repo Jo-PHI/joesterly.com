@@ -1,11 +1,446 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Jo Esterly</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Jo Esterly</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Marcellus&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --cream: #f5efe6;
+      --warm-white: #faf7f2;
+      --ink: #1c1814;
+      --ash: #8a7f74;
+      --gold: #b89a6a;
+      --steel: #7a9aaa;
+      --verdigris: #6a9e8f;
+      --rule: rgba(28,24,20,0.12);
+    }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      background: var(--cream);
+      color: var(--ink);
+      overflow-x: hidden;
+      cursor: none;
+      min-height: 100vh;
+    }
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      opacity: 0.022;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+      z-index: 9998;
+    }
+    .cursor {
+      position: fixed;
+      width: 6px; height: 6px;
+      background: var(--ink);
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 9999;
+      transform: translate(-50%, -50%);
+      transition: width 0.4s ease, height 0.4s ease, opacity 0.4s ease, background 0.4s ease;
+      mix-blend-mode: multiply;
+    }
+    .cursor.expanded { width: 44px; height: 44px; background: var(--gold); opacity: 0.25; }
+    ::selection { background: rgba(184,154,106,0.25); color: var(--ink); }
+    /* ── LAYOUT ── */
+    .page {
+      min-height: 100vh;
+      display: grid;
+      grid-template-rows: 1fr auto;
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 0 clamp(2rem, 8vw, 7rem);
+    }
+    /* ── FOYER ── */
+    .foyer {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 12vh 0 8vh;
+    }
+    /* Name — clickable, opens About */
+    .name {
+      font-family: 'Marcellus', serif;
+      font-size: clamp(0.6rem, 1.1vw, 0.72rem);
+      letter-spacing: 0.38em;
+      text-transform: uppercase;
+      color: var(--ash);
+      opacity: 0;
+      animation: fadeUp 1s ease 0.2s forwards;
+      margin-bottom: 6vh;
+      cursor: none;
+      text-decoration: none;
+      display: inline-block;
+      transition: color 0.3s ease;
+    }
+    .name:hover { color: var(--ink); }
+    .statement {
+      font-size: clamp(1.4rem, 3vw, 2.4rem);
+      font-weight: 300;
+      font-style: italic;
+      line-height: 1.35;
+      color: var(--ink);
+      max-width: 640px;
+      opacity: 0;
+      animation: fadeUp 1.2s ease 0.5s forwards;
+      margin-bottom: 8vh;
+    }
+    /* ── EXHIBIT DOORS ── */
+    .exhibits {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      opacity: 0;
+      animation: fadeUp 1s ease 1s forwards;
+    }
+    .exhibit-door {
+      display: grid;
+      grid-template-columns: auto 1fr auto;
+      align-items: center;
+      gap: 2rem;
+      padding: 2.8vh 0;
+      border-top: 1px solid var(--rule);
+      text-decoration: none;
+      color: inherit;
+      position: relative;
+      cursor: none;
+    }
+    .exhibit-door:last-child { border-bottom: 1px solid var(--rule); }
+    .exhibit-door::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: rgba(184,154,106,0.05);
+      opacity: 0;
+      transition: opacity 0.4s ease;
+      pointer-events: none;
+    }
+    .exhibit-door:hover::before { opacity: 1; }
+    /* Each exhibit gets its accent on hover */
+    .exhibit-door.door-i:hover .door-mark svg  { opacity: 0.55; transform: scale(1.06); }
+    .exhibit-door.door-i:hover .door-title     { color: var(--gold); }
+    .exhibit-door.door-i:hover .door-arrow     { transform: translateX(5px); color: var(--gold); }
+    .exhibit-door.door-ii:hover .door-mark svg { opacity: 0.55; transform: scale(1.06); }
+    .exhibit-door.door-ii:hover .door-title    { color: var(--steel); }
+    .exhibit-door.door-ii:hover .door-arrow    { transform: translateX(5px); color: var(--steel); }
+    .exhibit-door.door-iii:hover .door-mark svg { opacity: 0.55; transform: scale(1.06); }
+    .exhibit-door.door-iii:hover .door-title    { color: var(--verdigris); }
+    .exhibit-door.door-iii:hover .door-arrow    { transform: translateX(5px); color: var(--verdigris); }
+    .exhibit-door.door-about:hover .door-title  { color: var(--ash); }
+    .exhibit-door.door-about:hover .door-arrow  { transform: translateX(5px); color: var(--ash); }
+    .door-mark {
+      width: 52px;
+      flex-shrink: 0;
+    }
+    .door-mark svg {
+      width: 52px; height: 52px;
+      opacity: 0.22;
+      transition: opacity 0.4s ease, transform 0.4s ease;
+    }
+    .door-number {
+      font-family: 'Marcellus', serif;
+      font-size: clamp(0.55rem, 0.9vw, 0.65rem);
+      letter-spacing: 0.4em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 0.35rem;
+    }
+    .door-ii .door-number  { color: var(--steel); }
+    .door-iii .door-number { color: var(--verdigris); }
+    .door-about .door-number { color: var(--ash); opacity: 0.6; }
+    .door-title {
+      font-size: clamp(1.1rem, 2.2vw, 1.75rem);
+      font-weight: 300;
+      line-height: 1.15;
+      transition: color 0.4s ease;
+    }
+    .door-title em { font-style: italic; color: var(--gold); }
+    .door-ii .door-title em  { color: var(--steel); }
+    .door-iii .door-title em { color: var(--verdigris); }
+    .door-sub {
+      font-size: clamp(0.78rem, 1.2vw, 0.9rem);
+      font-style: italic;
+      color: var(--ash);
+      margin-top: 0.35rem;
+      line-height: 1.5;
+    }
+    .door-enter {
+      font-family: 'Marcellus', serif;
+      font-size: 0.6rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--ash);
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+    .door-arrow {
+      display: inline-block;
+      margin-left: 0.4rem;
+      transition: transform 0.4s ease, color 0.4s ease;
+    }
+    /* ── THRESHOLD QUOTE ── */
+    .threshold-quote {
+      padding: 4vh 0 3vh;
+      opacity: 0;
+      animation: fadeIn 1.4s ease 1.6s forwards;
+      text-align: center;
+    }
+    .quote-rule {
+      width: 32px; height: 1px;
+      background: var(--gold);
+      margin: 0 auto 2rem;
+    }
+    .quote-text {
+      font-size: clamp(0.9rem, 1.5vw, 1.08rem);
+      font-style: italic;
+      line-height: 1.85;
+      color: var(--ash);
+      max-width: 520px;
+      margin: 0 auto;
+    }
+    /* ── FOOTER ── */
+    footer {
+      padding: 0 0 5vh;
+      opacity: 0;
+      animation: fadeIn 1.2s ease 1.8s forwards;
+    }
+    .footer-inner {
+      border-top: 1px solid var(--rule);
+      padding-top: 2.5vh;
+      display: flex;
+      justify-content: center;
+      align-items: baseline;
+    }
+    .footer-copy {
+      font-family: 'Marcellus', serif;
+      font-size: 0.6rem;
+      letter-spacing: 0.15em;
+      color: rgba(138,127,116,0.5);
+      text-align: center;
+    }
+    /* ── ABOUT OVERLAY ── */
+    .about-overlay {
+      position: fixed;
+      inset: 0;
+      background: var(--cream);
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      pointer-events: none;
+      visibility: hidden;
+      transition: opacity 0.7s ease, visibility 0.7s ease;
+      padding: clamp(2rem, 8vw, 7rem);
+      overflow-y: auto;
+    }
+    .about-overlay.open {
+      opacity: 1;
+      pointer-events: all;
+      visibility: visible;
+    }
+    .about-inner {
+      max-width: 560px;
+      position: relative;
+    }
+    .about-close {
+      position: absolute;
+      top: -3rem;
+      right: 0;
+      font-family: 'Marcellus', serif;
+      font-size: 0.6rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--ash);
+      background: none;
+      border: none;
+      cursor: none;
+      transition: color 0.3s ease;
+      padding: 0;
+    }
+    .about-close:hover { color: var(--ink); }
+    .about-text {
+      font-size: clamp(1rem, 1.8vw, 1.2rem);
+      font-style: italic;
+      line-height: 2;
+      color: var(--ink);
+    }
+    .about-text p { margin-bottom: 1.8em; }
+    .about-text p:last-of-type { margin-bottom: 0; }
+    .about-location {
+      margin-top: 2.5rem;
+      font-family: 'Marcellus', serif;
+      font-size: 0.68rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--ash);
+      text-align: center;
+    }
+    .about-phi {
+      margin-top: 1.2rem;
+      text-align: center;
+    }
+    .about-phi-name {
+      font-family: 'Marcellus', serif;
+      font-size: 0.62rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: rgba(138,127,116,0.6);
+      display: block;
+    }
+    /* ── ANIMATIONS ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(18px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+    /* ── RESPONSIVE ── */
+    @media (max-width: 600px) {
+      .exhibit-door { grid-template-columns: auto 1fr; }
+      .door-enter { display: none; }
+      .foyer { padding: 10vh 0 6vh; }
+    }
+  </style>
 </head>
 <body>
-<p>Site loading. One moment.</p>
+  <div class="cursor" id="cursor"></div>
+  <div class="about-overlay" id="aboutOverlay">
+    <div class="about-inner">
+      <button class="about-close" id="aboutClose">Close ×</button>
+      <div class="about-text">
+        <p>For thirty years, she has witnessed the resolve behind the effort, the insight that finds its way through, the knowing that even smart systems cannot see.</p>
+        <p>That is what she writes. The part of being human that does not fit on a page and flows into her archive.</p>
+      </div>
+      <div class="about-location">New York City</div>
+      <div class="about-phi">
+        <span class="about-phi-name">PHI &nbsp;·&nbsp; Portraits of Human Intelligence</span>
+      </div>
+    </div>
+  </div>
+  <div class="page">
+    <div class="foyer">
+      <p class="name">Jo Esterly</p>
+      <p class="statement">I narrate stories told by our hands, our brows, our gestures.</p>
+      <nav class="exhibits">
+        <a href="exhibit-i.html" class="exhibit-door door-i">
+          <div class="door-mark" aria-hidden="true">
+            <svg viewBox="0 0 52 52" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <line x1="3" y1="26" x2="20" y2="26" stroke="#1c1814" stroke-width="1"/>
+              <circle cx="26" cy="26" r="4" stroke="#1c1814" stroke-width="0.9" fill="none"/>
+              <line x1="32" y1="26" x2="49" y2="26" stroke="#1c1814" stroke-width="1" stroke-dasharray="3 4"/>
+            </svg>
+          </div>
+          <div class="door-body">
+            <div class="door-number">Exhibit I</div>
+            <div class="door-title">Shadow <em>Resume</em></div>
+            <div class="door-sub">The credentials that don't fit on a page.</div>
+          </div>
+          <div class="door-enter">Enter <span class="door-arrow">→</span></div>
+        </a>
+        <a href="exhibit-ii.html" class="exhibit-door door-ii">
+          <div class="door-mark" aria-hidden="true">
+            <svg viewBox="0 0 52 52" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <line x1="3" y1="10" x2="26" y2="26" stroke="#1c1814" stroke-width="1"/>
+              <line x1="49" y1="10" x2="26" y2="26" stroke="#1c1814" stroke-width="1" stroke-dasharray="4 3"/>
+              <line x1="26" y1="26" x2="26" y2="49" stroke="#1c1814" stroke-width="0.8" stroke-dasharray="2 4"/>
+              <circle cx="26" cy="26" r="2.5" fill="#1c1814"/>
+            </svg>
+          </div>
+          <div class="door-body">
+            <div class="door-number">Exhibit II &nbsp;·&nbsp; Work in Process</div>
+            <div class="door-title">What if we Shared our<br><em>Shadow Resume</em> with AI?</div>
+          </div>
+          <div class="door-enter">Enter <span class="door-arrow">→</span></div>
+        </a>
+        <a href="exhibit-iii.html" class="exhibit-door door-iii">
+          <div class="door-mark" aria-hidden="true">
+            <svg viewBox="0 0 52 52" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <line x1="26" y1="42" x2="10" y2="12" stroke="#1c1814" stroke-width="0.9" opacity="0.8"/>
+              <line x1="26" y1="42" x2="42" y2="12" stroke="#1c1814" stroke-width="0.9" opacity="0.8"/>
+              <line x1="26" y1="42" x2="16" y2="12" stroke="#1c1814" stroke-width="0.6" stroke-dasharray="3 4" opacity="0.5"/>
+              <line x1="26" y1="42" x2="36" y2="12" stroke="#1c1814" stroke-width="0.6" stroke-dasharray="3 4" opacity="0.5"/>
+              <circle cx="26" cy="42" r="2.5" stroke="#1c1814" stroke-width="0.8" fill="none"/>
+            </svg>
+          </div>
+          <div class="door-body">
+            <div class="door-number">Exhibit III</div>
+            <div class="door-title">Hello, <em>AI</em></div>
+            <div class="door-sub">The correspondence that followed the work into the world.</div>
+          </div>
+          <div class="door-enter">Enter <span class="door-arrow">→</span></div>
+        </a>
+      </nav>
+      <div class="site-nav" style="
+        margin-top: 1.2vh;
+        display: flex;
+        gap: 2rem;
+        justify-content: center;
+        opacity: 0;
+        animation: fadeIn 1s ease 1.3s forwards;
+      ">
+        <a id="nameLink" style="
+          font-family: 'Marcellus', serif;
+          font-size: 0.6rem;
+          letter-spacing: 0.3em;
+          text-transform: uppercase;
+          color: var(--ash);
+          text-decoration: none;
+          transition: color 0.3s ease;
+          cursor: none;
+        ">About</a>
+        <a href="mailto:PHI@joesterly.com" style="
+          font-family: 'Marcellus', serif;
+          font-size: 0.6rem;
+          letter-spacing: 0.3em;
+          text-transform: uppercase;
+          color: var(--ash);
+          text-decoration: none;
+          transition: color 0.3s ease;
+          cursor: none;
+        ">Contact</a>
+      </div>
+      <div class="threshold-quote">
+        <div class="quote-rule"></div>
+        <p class="quote-text">Every fingerprint of intrinsic intelligence carries the echo of the ancient and a lightness of being.</p>
+      </div>
+    </div>
+    <footer>
+      <div class="footer-inner">
+        <span class="footer-copy">PHI &nbsp;·&nbsp; Portraits of Human Intelligence &nbsp;·&nbsp; © 2026, Jo Esterly</span>
+      </div>
+    </footer>
+  </div>
+  <script>
+    // Cursor
+    const cursor = document.getElementById('cursor');
+    document.addEventListener('mousemove', e => {
+      cursor.style.left = e.clientX + 'px';
+      cursor.style.top = e.clientY + 'px';
+    });
+    document.querySelectorAll('a, button').forEach(el => {
+      el.addEventListener('mouseenter', () => cursor.classList.add('expanded'));
+      el.addEventListener('mouseleave', () => cursor.classList.remove('expanded'));
+    });
+    // About overlay
+    const overlay   = document.getElementById('aboutOverlay');
+    const nameLink  = document.getElementById('nameLink');
+    const closeBtn  = document.getElementById('aboutClose');
+    nameLink.addEventListener('click', () => overlay.classList.add('open'));
+    closeBtn.addEventListener('click', () => overlay.classList.remove('open'));
+    // Close on background click
+    overlay.addEventListener('click', e => {
+      if (e.target === overlay) overlay.classList.remove('open');
+    });
+    // Close on Escape
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Escape') overlay.classList.remove('open');
+    });
+  </script>
 </body>
 </html>
