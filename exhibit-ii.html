@@ -420,7 +420,14 @@
       content: '';
       position: absolute;
       inset: 0;
-      background: radial-gradient(ellipse 60% 60% at 50% 50%, rgba(122,154,170,0.09) 0%, transparent 70%);
+      background: radial-gradient(ellipse 60% 60% at 50% 50%, rgba(184,154,106,0.09) 0%, transparent 70%);
+    }
+    #closing::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 10%; right: 10%;
+      height: 1px;
+      background: linear-gradient(to right, transparent, rgba(184,154,106,0.35), transparent);
     }
     .closing-label {
       font-family: 'Marcellus', serif;
@@ -517,8 +524,8 @@
     <a href="index.html" class="landing-back">← Jo Esterly</a>
     <div class="landing-label">Exhibit II &nbsp;·&nbsp; Work in Process</div>
     <h1 class="landing-title">What if we Shared our<br><em>Shadow Resume</em> with AI?</h1>
-    <a href="#room-1" class="enter-btn">Enter Exhibit</a>
-    <div class="scroll-indicator">
+    <a href="#room-1" class="enter-btn" style="display:none;">Enter Exhibit</a>
+    <div class="scroll-indicator" style="animation-delay:1.6s;">
       <span>Scroll</span>
       <div class="scroll-line"></div>
     </div>
@@ -621,7 +628,20 @@
       </div>
     </div>
     <a href="index.html" class="closing-back reveal reveal-delay-2">Jo Esterly</a>
-    <p class="closing-copyright reveal reveal-delay-2">PHI &nbsp;·&nbsp; Portraits of Human Intelligence &nbsp;·&nbsp; © 2026, Jo Esterly</p>
+    <div style="margin-top:2rem; opacity:0.4;">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="32" height="32">
+        <circle cx="60" cy="60" r="58" fill="#F0EBE1" opacity="0.08"/>
+        <circle cx="60" cy="60" r="52" fill="none" stroke="#B89A6A" stroke-width="1" opacity="0.5"/>
+        <text x="60" y="55" text-anchor="middle" dominant-baseline="middle"
+          font-family="Marcellus, Georgia, serif" font-size="15" fill="#B89A6A" letter-spacing="5">PHI</text>
+        <line x1="38" y1="62" x2="82" y2="62" stroke="#B89A6A" stroke-width="0.5" opacity="0.35"/>
+        <text x="60" y="71" text-anchor="middle" dominant-baseline="middle"
+          font-family="Marcellus, Georgia, serif" font-size="4.8" fill="#F0EBE1" letter-spacing="2.2" opacity="0.4">PORTRAITS OF</text>
+        <text x="60" y="79" text-anchor="middle" dominant-baseline="middle"
+          font-family="Marcellus, Georgia, serif" font-size="4.8" fill="#F0EBE1" letter-spacing="2.2" opacity="0.4">HUMAN INTELLIGENCE</text>
+      </svg>
+    </div>
+    <p style="margin-top:0.6rem; font-family:'Marcellus',serif; font-size:0.5rem; letter-spacing:0.18em; color:rgba(239,240,240,0.18);">© 2026, Jo Esterly</p>
   </section>
   <script>
     const cursor = document.getElementById('cursor');
