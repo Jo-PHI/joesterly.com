@@ -395,6 +395,13 @@
     }
     .trace-before { color: var(--ash); font-style: italic; }
     .trace-after  { color: var(--steel); font-style: italic; font-weight: 600; }
+    .trace-delta  {
+      color: var(--steel);
+      font-family: 'Marcellus', serif;
+      font-size: 0.72rem;
+      letter-spacing: 0.12em;
+      font-style: italic;
+    }
     /* The statement */
     .curiosity-statement {
       font-size: clamp(0.9rem, 1.5vw, 1.05rem);
@@ -597,18 +604,15 @@
       <div class="curiosity-trace reveal reveal-delay-3">
         <div class="trace-row">
           <span class="trace-label">Spotting expertise</span>
-          <span class="trace-before">3.7</span>
-          <span class="trace-after">4.7 →</span>
+          <span class="trace-delta">↑ significant</span>
         </div>
         <div class="trace-row">
           <span class="trace-label">Respecting the human</span>
-          <span class="trace-before">4.0</span>
-          <span class="trace-after">5.0 →</span>
+          <span class="trace-delta">↑ marked</span>
         </div>
         <div class="trace-row">
           <span class="trace-label">Looking before correcting</span>
-          <span class="trace-before">2.3</span>
-          <span class="trace-after">4.7 →</span>
+          <span class="trace-delta">↑↑ substantial</span>
         </div>
       </div>
       <p class="curiosity-statement reveal reveal-delay-4" style="font-style:normal;">
